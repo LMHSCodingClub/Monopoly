@@ -7,14 +7,19 @@ import java.awt.FlowLayout;
 import java.awt.Font;
 import java.awt.GridBagLayout;
 import java.awt.Toolkit;
+import java.beans.PropertyChangeEvent;
+import java.beans.PropertyChangeListener;
+import java.text.NumberFormat;
 
 import javax.swing.BorderFactory;
+import javax.swing.BoxLayout;
 import javax.swing.JButton;
+import javax.swing.JFormattedTextField;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
-class UserInterface extends JFrame {
+class UserInterface extends JFrame implements PropertyChangeListener {
     private static final long serialVersionUID = 1L;
 
     private int player;
@@ -40,8 +45,29 @@ class UserInterface extends JFrame {
         jPlayer = new JLabel("Player: " + player);
         JLabel jBalance = new JLabel("Current Balance: $" + balance);
         JButton rollDice = createRollDiceButton();
+        
+        JPanel tradingMenu = new JPanel();
+        
         JButton tradeProperty = new JButton("Trade Property");
+        tradeProperty.addActionListener(e -> {
+            tradingMenu.setVisible(true);
+        });
+        
         JButton nextTurn = createNextTurnButton();
+
+        tradingMenu.setLayout(new BoxLayout(tradingMenu, BoxLayout.Y_AXIS));
+        
+        JLabel trade = new JLabel("Trade");
+        trade.setFont(new Font("Arial", Font.BOLD, 40));
+
+        JLabel amountGivingLabel = new JLabel("Amount Giving: ");
+
+        tradingMenu.add(trade);
+        tradingMenu.add(amountGivingLabel);
+        tradingMenu.add(new NumberField());
+        tradingMenu.add(new JLabel("Amount Taking: "));
+        tradingMenu.add(new NumberField());
+        tradingMenu.setVisible(false);
 
         sideBar.setLayout(new FlowLayout());
         sideBar.add(jPlayer);
@@ -49,6 +75,7 @@ class UserInterface extends JFrame {
         sideBar.add(rollDice);
         sideBar.add(tradeProperty);
         sideBar.add(nextTurn);
+        sideBar.add(tradingMenu);
         add(sideBar, BorderLayout.EAST);
 
         // board
@@ -113,5 +140,11 @@ class UserInterface extends JFrame {
         });
 
         return nextTurn;
+    }
+
+    @Override
+    public void propertyChange(PropertyChangeEvent evt) {
+        // TODO Auto-generated method stub
+        
     }
 }
