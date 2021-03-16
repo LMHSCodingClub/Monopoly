@@ -1,71 +1,117 @@
-import java.awt.*;
-import javax.swing.*;
+package com.lmhscodingclub.monopoly.userinterface;
+
+import java.awt.BorderLayout;
+import java.awt.Color;
+import java.awt.Dimension;
+import java.awt.FlowLayout;
+import java.awt.Font;
+import java.awt.GridBagLayout;
+import java.awt.Toolkit;
+
+import javax.swing.BorderFactory;
+import javax.swing.JButton;
+import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.JPanel;
 
 class UserInterface extends JFrame {
-  private static final long serialVersionUID = 1L;
+    private static final long serialVersionUID = 1L;
 
-  public static void main(String[] args) {
-    UserInterface frame = new UserInterface();
+    private int player;
+    private int numPlayers;
 
-  }
+    private JLabel jPlayer;
 
-  public UserInterface() {
-    // Font mainFont = new Font("Arial", Font.PLAIN, 20);
-  
-    JPanel gui = new JPanel();
-    gui.setBackground(Color.LIGHT_GRAY);
-    gui.setPreferredSize(new Dimension(300,0));
+    public static void main(String[] args) {
+        new UserInterface();
+    }
 
-    //just placeholders for now
-    int move=1;
-    int player=1;
-    int balance=1500;
-    
-    JLabel jMove = new JLabel("Turn: " + move);    
-    JLabel jPlayer = new JLabel("Player: " + player);
-    JLabel jBalance = new JLabel("Current Balance: $" + balance);
-    JButton rollDice = new JButton("Roll Dice");
-    JButton tradeProperty = new JButton("Trade Property");
-    
-    gui.setLayout(new FlowLayout());
-    gui.add(jMove);
-    gui.add(jPlayer);
-    gui.add(jBalance);
-    gui.add(rollDice);
-    gui.add(tradeProperty);
-    add(gui, BorderLayout.EAST);
+    public UserInterface() {
+        // Font mainFont = new Font("Arial", Font.PLAIN, 20);
+        // just placeholders for now
+        numPlayers = 6;
+        player = 1;
+        int balance = 1500;
 
-    //board
-    JPanel template = new JPanel();
-    JPanel board = new JPanel();
-    board.setBackground(Color.decode("#cde6d0"));
-    board.setPreferredSize(new Dimension(750,750));
-    board.setLayout(new GridBagLayout());
-    board.setBorder(BorderFactory.createLineBorder(Color.BLACK, 10));
+        JPanel sideBar = new JPanel();
+        sideBar.setBackground(Color.LIGHT_GRAY);
+        sideBar.setPreferredSize(new Dimension(300, 0));
 
-    JLabel logo = new JLabel("MONOPOLY");
-    logo.setFont(new Font("Arial Black", Font.BOLD, 50));
-    logo.setOpaque(true);
-    logo.setBackground(Color.RED);
-    logo.setForeground(Color.WHITE);
-    logo.setBorder(BorderFactory.createLineBorder(Color.BLACK, 7));
-    template.add(board, BorderLayout.CENTER);
-    board.add(logo);
-    add(template);
+        jPlayer = new JLabel("Player: " + player);
+        JLabel jBalance = new JLabel("Current Balance: $" + balance);
+        JButton rollDice = createRollDiceButton();
+        JButton tradeProperty = new JButton("Trade Property");
+        JButton nextTurn = createNextTurnButton();
 
-    //spaces
-    // JButton button = new JButton("Test");
-    // board.add(button);
-    // JButton button1 = new JButton("Test");
-    // board.add(button1);
-    
-    //set resolution
-    Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
-    int height = (int)(screenSize.getHeight());
-    int width = (int)(screenSize.getWidth());    
-    setSize(width, height);    
-    setDefaultCloseOperation(EXIT_ON_CLOSE);
-    setVisible(true);
-    setTitle("Monopoly");
-  }
+        sideBar.setLayout(new FlowLayout());
+        sideBar.add(jPlayer);
+        sideBar.add(jBalance);
+        sideBar.add(rollDice);
+        sideBar.add(tradeProperty);
+        sideBar.add(nextTurn);
+        add(sideBar, BorderLayout.EAST);
+
+        // board
+        JPanel template = new JPanel();
+        JPanel board = new JPanel();
+        board.setBackground(Color.decode("#cde6d0"));
+        board.setPreferredSize(new Dimension(650, 650));
+        board.setLayout(new GridBagLayout());
+        board.setBorder(BorderFactory.createLineBorder(Color.BLACK, 10));
+
+        JLabel logo = createLogo();
+        template.add(board, BorderLayout.CENTER);
+        board.add(logo);
+        add(template);
+
+        // spaces
+        // JButton button = new JButton("Test");
+        // board.add(button);
+        // JButton button1 = new JButton("Test");
+        // board.add(button1);
+
+        // set resolution
+        Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
+        int height = (int) (screenSize.getHeight());
+        int width = (int) (screenSize.getWidth());
+        setSize(width, height);
+        setDefaultCloseOperation(EXIT_ON_CLOSE);
+        setVisible(true);
+        setTitle("Monopoly");
+    }
+
+    private JButton createRollDiceButton() {
+        JButton rollDice = new JButton("Roll Dice");
+        
+        rollDice.addActionListener((e) -> {
+            int firstDieNum = (int) Math.round(Math.random() * 5) + 1;
+            int secondDieNum = (int) Math.round(Math.random() * 5) + 1;
+            
+            // Constrain to 2 and 12
+            int result = Math.max(2, Math.min(firstDieNum + secondDieNum, 12));
+        });
+        
+        return rollDice;
+    }
+
+    private JLabel createLogo() {
+        JLabel logo = new JLabel("MONOPOLY");
+        logo.setFont(new Font("Arial Black", Font.BOLD, 50));
+        logo.setOpaque(true);
+        logo.setBackground(Color.RED);
+        logo.setForeground(Color.WHITE);
+        logo.setBorder(BorderFactory.createLineBorder(Color.BLACK, 7));
+        return logo;
+    }
+
+    private JButton createNextTurnButton() {
+        JButton nextTurn = new JButton("Next Turn");
+
+        nextTurn.addActionListener(e -> {
+            player = player % numPlayers + 1;
+            jPlayer.setText("Player: " + player);
+        });
+
+        return nextTurn;
+    }
 }
