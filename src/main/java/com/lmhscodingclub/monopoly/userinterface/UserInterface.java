@@ -9,6 +9,7 @@ import java.awt.GridBagLayout;
 import java.awt.Toolkit;
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
+import java.net.URL;
 import java.text.NumberFormat;
 
 import javax.swing.BorderFactory;
@@ -18,6 +19,7 @@ import javax.swing.JFormattedTextField;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
+import javax.swing.ImageIcon;
 
 class UserInterface extends JFrame implements PropertyChangeListener {
     private static final long serialVersionUID = 1L;
@@ -50,10 +52,14 @@ class UserInterface extends JFrame implements PropertyChangeListener {
         
         JButton tradeProperty = new JButton("Trade Property");
         tradeProperty.addActionListener(e -> {
-            tradingMenu.setVisible(true);
+            if (tradingMenu.isVisible()){
+                tradingMenu.setVisible(false);
+            } else {
+                tradingMenu.setVisible(true);
+            }
         });
         
-        JButton nextTurn = createNextTurnButton();
+        JButton nextTurn = createNextTurnButton(rollDice);
 
         tradingMenu.setLayout(new BoxLayout(tradingMenu, BoxLayout.Y_AXIS));
         
@@ -116,6 +122,16 @@ class UserInterface extends JFrame implements PropertyChangeListener {
             
             // Constrain to 2 and 12
             int result = Math.max(2, Math.min(firstDieNum + secondDieNum, 12));
+            System.out.println(result);
+            
+            // URL url = getClass().getResource("/images/rolldice-1.gif");
+            // System.out.println(url);
+            // ImageIcon imageIcon = new ImageIcon(url);
+            // JLabel diceAnimation = new JLabel("test");
+            // add(diceAnimation);
+
+            //disbales button after use. the button will be re-enabled once a new turn begins
+            rollDice.setEnabled(false);
         });
         
         return rollDice;
@@ -131,12 +147,14 @@ class UserInterface extends JFrame implements PropertyChangeListener {
         return logo;
     }
 
-    private JButton createNextTurnButton() {
+    private JButton createNextTurnButton(JButton rollDice) {
         JButton nextTurn = new JButton("Next Turn");
 
         nextTurn.addActionListener(e -> {
             player = player % numPlayers + 1;
             jPlayer.setText("Player: " + player);
+            rollDice.setEnabled(true);
+
         });
 
         return nextTurn;
@@ -145,7 +163,6 @@ class UserInterface extends JFrame implements PropertyChangeListener {
     @Override
     public void propertyChange(PropertyChangeEvent evt) {
         // TODO Auto-generated method stub
-        System.out.println("test");
         
     }
 }
