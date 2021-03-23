@@ -23,10 +23,8 @@ import javax.swing.ImageIcon;
 
 class UserInterface extends JFrame implements PropertyChangeListener {
     private static final long serialVersionUID = 1L;
-
     private int player;
     private int numPlayers;
-
     private JLabel jPlayer;
 
     public static void main(String[] args) {
@@ -128,7 +126,7 @@ class UserInterface extends JFrame implements PropertyChangeListener {
             // System.out.println(url);
             // ImageIcon imageIcon = new ImageIcon(url);
             // JLabel diceAnimation = new JLabel("test");
-            // add(diceAnimation);
+            // add(diceAnimation); 
 
             //disbales button after use. the button will be re-enabled once a new turn begins
             rollDice.setEnabled(false);
