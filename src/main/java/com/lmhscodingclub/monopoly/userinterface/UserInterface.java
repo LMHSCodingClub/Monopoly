@@ -145,6 +145,7 @@ class UserInterface extends JFrame implements PropertyChangeListener {
     @Override
     public void propertyChange(PropertyChangeEvent evt) {
         // TODO Auto-generated method stub
+        System.out.println("test");
         
     }
 }
