@@ -9,7 +9,7 @@ public class Board
         int num_player = scan.nextInt();
         int turn = 0;
  
-        BoardSpace[] gameboard = createBoard(); // creates the game board array and assigns every space a board space type. 
+        BoardS gameboard = Board(); // creates the game board array and assigns every space a board space type. 
         
         //Create player array list
         ArrayList<Player> player_array = new Player[num_players];;
@@ -26,6 +26,7 @@ public class Board
        int doubles = 0;
        while(num_player > 1)
        {
+        // Call dice rolling graphic
         int roll1 =  (int)(Math.random() * (6 - 1 + 1) + 1);
         int roll2 = (int)(Math.random() * (6 - 1 + 1) + 1);
         player_array[turn].move(roll1+roll2);
@@ -33,26 +34,39 @@ public class Board
     player_array[turn].gameboard[player_array[turn].getLocation].doAction;
          
        if(roll1 == roll2){ 
-         If (doubles == 2){
+         if (doubles == 2)
+          {
              player[turn].moveToJail();
-         }
+          }
           else
           {
           doubles++;
           turn--;
           }
         }
+      
       // Call the interface and ask if the player wants to trade and all that. This section isn’t our business to code. 
  
-        if (turn < num_player - 2) // Check this number
+        if (turn < num_player - 1) 
           turn++;
         else
           turn = 0;
        }      
  
    }
- 
- 
+
+   public Board()
+   {
+    BoardSpace[] theGameBoard = new BoardSpace[40]; 
     
+
+    // BoardSpace is abstract.
+    // Call mutators that turn each board space into whatever space
+    // we want it to be.
+    // Return to here.
+   }
+
+   
+
  
 }
