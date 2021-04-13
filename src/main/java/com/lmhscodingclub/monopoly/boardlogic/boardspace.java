@@ -1,5 +1,6 @@
 
 class BoardSpace { //Maybe this should be abstract 
+public static int FreeParking = 500;
 private String type;
 /*
 List of all types:
@@ -29,6 +30,8 @@ Pink
 Orange
 Misc. (Not for sale)
 */
+private Player owner;
+
 
 public BoardSpace()
 {
@@ -37,14 +40,14 @@ public BoardSpace()
     color = null;
 }
 
-public SetSpace(String InputType, String InputName, String InputColor)
+public BoardSpace(String InputType, String InputName, String InputColor)
 {
     type = InputType;
     name = InputName;
     color = InputColor;
 }
 
-public SetSpace(int price, String InputName, String InputColor)
+public BoardSpace(int price, String InputName, String InputColor)
 {
     type = "property";
     name = InputName;
@@ -53,6 +56,90 @@ public SetSpace(int price, String InputName, String InputColor)
 }
 
 //Write the action class (DoAction)/begin setting the board elements.
+public void DoAction(Player player)
+{
+    switch(type)
+    {
+        
+        case "Property":
+            if (owner == null && player.getBalance > cost) //getBalance may not be the final name
+            {
+                //offer to buy
+            }
+            else if(owner == player)
+            {
+                //do nothing
+            }
+            else if //Owner is not the player on the property
+            {
+                //charge them whatever is worth
+            }
+        break;
 
+
+        case "Railroad":
+            //charge the player
+            //move the player to the correct square    if (owner == null)
+            {
+                //offer to buy
+            }
+            else if(owner == player)
+            //Charge the player the amount stated
+            //Add the amount charged to FreeParking    {
+                //do nothing
+            }
+            else if //Owner is not the player on the property
+            {
+            //Add FreeParking dollars to the player
+            FreeParking = 500;        //charge them whatever is worth
+            }
+        break;
+
+        
+            // Do a bonus effect, I geusscase "Tax": 
+        
+        break;
+
+        
+        case "Free Parking":
+        
+        break;
+
+        
+        case "Bonus":
+        
+        break;
+
+        
+        case "Visiting Jail":
+            //Do Nothing
+        break;
+
+        
+        case "Jail":
+            //jail counter for each player? 
+            //We can increemnt it by one, and when it hits 3 we set it
+            // to 0 and move them to Visiting Jail
+            //Or they can pay 50 to do that prematurely
+        break;
+
+        
+            case "Go To Jail":
+            //player.moveToJail();
+        break;
+
+        
+        case "Go":
+            //Give player 200$
+        break;
+
+        
+        case "Utilities":
+        
+        break;
+
+        
+    }
+}
 
 }
