@@ -9,10 +9,10 @@ public class Board
         int num_player = scan.nextInt();
         int turn = 0;
  
-        BoardS gameboard = Board(); // creates the game board array and assigns every space a board space type. 
+        Board gameboard = Board(); // creates the game board array and assigns every space a board space type. 
         
         //Create player array list
-        ArrayList<Player> player_array = new Player[num_players];;
+        ArrayList<Player> player_array = new Player[num_players];
  
         for( int i = 0; i < num_player; i++)
         {
