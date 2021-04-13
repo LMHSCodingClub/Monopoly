@@ -31,7 +31,7 @@ public class Board
         int roll2 = (int)(Math.random() * (6 - 1 + 1) + 1);
         player_array[turn].move(roll1+roll2);
     
-    player_array[turn].gameboard[player_array[turn].getLocation].doAction;
+    // player_array[turn].gameboard[player_array[turn].getLocation];
          
        if(roll1 == roll2){ 
          if (doubles == 2)

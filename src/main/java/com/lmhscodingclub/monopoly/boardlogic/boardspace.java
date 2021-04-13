@@ -1,3 +1,4 @@
+
 class BoardSpace { //Maybe this should be abstract 
 private String type;
 /*
