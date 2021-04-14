@@ -44,10 +44,13 @@ class UserInterface extends JFrame implements PropertyChangeListener {
 
         jPlayer = new JLabel("Player: " + player);
         JLabel jBalance = new JLabel("Current Balance: $" + balance);
-        JButton rollDice = createRollDiceButton();
-        
+
+        JLabel firstDie = new JLabel(); 
+        JLabel secondDie = new JLabel();
+        JButton rollDice = createRollDiceButton(firstDie, secondDie);
+            
         JPanel tradingMenu = new JPanel();
-        
+
         JButton tradeProperty = new JButton("Trade Property");
         tradeProperty.addActionListener(e -> {
             if (tradingMenu.isVisible()){
@@ -57,7 +60,7 @@ class UserInterface extends JFrame implements PropertyChangeListener {
             }
         });
         
-        JButton nextTurn = createNextTurnButton(rollDice);
+        JButton nextTurn = createNextTurnButton(firstDie, secondDie, rollDice);
 
         tradingMenu.setLayout(new BoxLayout(tradingMenu, BoxLayout.Y_AXIS));
         
@@ -80,6 +83,8 @@ class UserInterface extends JFrame implements PropertyChangeListener {
         sideBar.add(tradeProperty);
         sideBar.add(nextTurn);
         sideBar.add(tradingMenu);
+        sideBar.add(firstDie);
+        sideBar.add(secondDie);
         add(sideBar, BorderLayout.EAST);
 
         // board
@@ -111,28 +116,37 @@ class UserInterface extends JFrame implements PropertyChangeListener {
         setTitle("Monopoly");
     }
 
-    private JButton createRollDiceButton() {
+    private JButton createRollDiceButton(JLabel firstDie, JLabel secondDie) {
         JButton rollDice = new JButton("Roll Dice");
         
-        rollDice.addActionListener((e) -> {
+        rollDice.addActionListener((e) -> {   
+            firstDie.setIcon(new ImageIcon());
+            secondDie.setIcon(new ImageIcon());
+
             int firstDieNum = (int) Math.round(Math.random() * 5) + 1;
             int secondDieNum = (int) Math.round(Math.random() * 5) + 1;
             
             // Constrain to 2 and 12
             int result = Math.max(2, Math.min(firstDieNum + secondDieNum, 12));
-            System.out.println(result);
-            
-            // URL url = getClass().getResource("/images/rolldice-1.gif");
-            // System.out.println(url);
-            // ImageIcon imageIcon = new ImageIcon(url);
-            // JLabel diceAnimation = new JLabel("test");
-            // add(diceAnimation); 
+            //System.out.println(result);
 
-            //disbales button after use. the button will be re-enabled once a new turn begins
+            // Animated Dice (first and second)
+            createDiceIcon(firstDie, firstDieNum);
+            createDiceIcon(secondDie, secondDieNum);
+            revalidate();
+
+            // Disables button after use. The button will be re-enabled once a new turn begins
             rollDice.setEnabled(false);
         });
         
         return rollDice;
+    }
+
+    private void createDiceIcon(JLabel die, int dieNum){
+        ImageIcon ii = new ImageIcon(this.getClass().getResource("./gifs/die_" + dieNum + ".gif"));
+        ii.getImage().flush();
+        die.setIcon(ii);
+
     }
 
     private JLabel createLogo() {
@@ -145,12 +159,16 @@ class UserInterface extends JFrame implements PropertyChangeListener {
         return logo;
     }
 
-    private JButton createNextTurnButton(JButton rollDice) {
+    private JButton createNextTurnButton(JLabel firstDie, JLabel secondDie, JButton rollDice) {
         JButton nextTurn = new JButton("Next Turn");
 
         nextTurn.addActionListener(e -> {
             player = player % numPlayers + 1;
             jPlayer.setText("Player: " + player);
+            
+            // Reset
+            firstDie.setIcon(new ImageIcon());
+            secondDie.setIcon(new ImageIcon());
             rollDice.setEnabled(true);
 
         });
