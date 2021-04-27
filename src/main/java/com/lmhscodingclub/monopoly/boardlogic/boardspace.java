@@ -1,4 +1,4 @@
-
+package com.lmhscodingclub.monopoly.boardlogic;
 class BoardSpace { //Maybe this should be abstract 
 public static int FreeParking = 500;
 private String type;
@@ -32,6 +32,8 @@ Misc. (Not for sale)
 */
 private Player owner;
 
+private int purchaseCost;
+private int rent;
 
 public BoardSpace()
 {
@@ -52,7 +54,12 @@ public BoardSpace(int price, String InputName, String InputColor)
     type = "property";
     name = InputName;
     color = InputColor;
-    int purchaseCost = price;    
+    purchaseCost = price;    
+}
+
+public void setRent(int set)
+{
+    rent = set;
 }
 
 //Write the action class (DoAction)/begin setting the board elements.
@@ -60,7 +67,7 @@ public void DoAction(Player player)
 {
     switch(type)
     {
-        
+        b
         case "Property":
             if (owner == null && player.getBalance > cost) //getBalance may not be the final name
             {
@@ -95,19 +102,21 @@ public void DoAction(Player player)
             }
         break;
 
-        
-            // Do a bonus effect, I geusscase "Tax": 
+        case "Tax": 
+
         
         break;
 
         
-        case "Free Parking":
+       case "Free Parking":
         
+
         break;
 
         
         case "Bonus":
         
+
         break;
 
         
