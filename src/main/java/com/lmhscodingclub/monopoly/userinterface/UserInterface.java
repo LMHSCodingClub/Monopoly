@@ -106,6 +106,8 @@ class UserInterface extends JFrame implements PropertyChangeListener {
         // JButton button1 = new JButton("Test");
         // board.add(button1);
 
+        add(new Board());
+
         // set resolution
         Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
         int height = (int) (screenSize.getHeight());
