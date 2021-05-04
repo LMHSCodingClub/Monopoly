@@ -3,6 +3,8 @@ import java.util.Scanner;
 import java.util.ArrayList;
 public class Board
 {
+    public int initial_location = 0;
+    
     public static void Main(String[] args)
    {
         Scanner scan = new Scanner(System.in);
@@ -25,12 +27,19 @@ public class Board
          
        // Game Loop Starts
        int doubles = 0;
+       
+      
        while(num_player > 1)
        {
+        initial_location = player_array[turn].getLocation();
         // Call dice rolling graphic
         int roll1 =  (int)(Math.random() * (6 - 1 + 1) + 1);
         int roll2 = (int)(Math.random() * (6 - 1 + 1) + 1);
         player_array[turn].move(roll1+roll2);
+
+      if (player_array[turn].getLocation() < initial_location)
+        //give the play $200
+      
     
     player_array[turn].gameboard[player_array[turn].getLocation].doAction;
          
@@ -47,7 +56,8 @@ public class Board
         }
       
       // Call the interface and ask if the player wants to trade and all that. This section isn’t our business to code. 
- 
+        
+
         if (turn < num_player - 1) 
           turn++;
         else
@@ -60,54 +70,54 @@ public class Board
    {
     BoardSpace[] GameBoard = new BoardSpace[40]; 
     
-    GameBoard[0] = new BoardSpace("Go", "Go", "Misc.");
+    GameBoard[39] = new BoardSpace("Go", "Go", "Misc.");
 
-    GameBoard[1] = new BoardSpace(60, "Mediterranean Avenue", "Brown");
-    GameBoard[2] = new BoardSpace("Bonus", "Community Chest", "Misc.");
-    GameBoard[3] = new BoardSpace(60, "Baltic Avenue", "Brown");
-    GameBoard[4] = new BoardSpace("Tax", "Income Tax", "Misc.");
-    GameBoard[5] = new BoardSpace("Railroad", "Reading Railroad", "Misc.");
-    GameBoard[6] = new BoardSpace(100, "Oriental Avenue", "Light Blue");
-    GameBoard[7] = new BoardSpace("Bonus", "Chance", "Misc.");
-    GameBoard[8] = new BoardSpace(100, "Vermont Avenue", "Light Blue");
-    GameBoard[9] = new BoardSpace(120, "Connecticut Avenue", "Light Blue");
+    GameBoard[0] = new BoardSpace(60, "Mediterranean Avenue", "Brown");
+    GameBoard[1] = new BoardSpace("Bonus", "Community Chest", "Misc.");
+    GameBoard[2] = new BoardSpace(60, "Baltic Avenue", "Brown");
+    GameBoard[3] = new BoardSpace("Tax", "Income Tax", "Misc.");
+    GameBoard[4] = new BoardSpace("Railroad", "Reading Railroad", "Misc.");
+    GameBoard[5] = new BoardSpace(100, "Oriental Avenue", "Light Blue");
+    GameBoard[6] = new BoardSpace("Bonus", "Chance", "Misc.");
+    GameBoard[7] = new BoardSpace(100, "Vermont Avenue", "Light Blue");
+    GameBoard[8] = new BoardSpace(120, "Connecticut Avenue", "Light Blue");
 
-    GameBoard[10] = new BoardSpace("Just Visiting", "Just Visiting", "Misc.");
+    GameBoard[9] = new BoardSpace("Just Visiting", "Just Visiting", "Misc.");
     GameBoard[40] = new BoardSpace("Jail", "Jail", "Misc.");
     
-    GameBoard[11] = new BoardSpace(140, "St. Charles Place", "Pink");
-    GameBoard[12] = new BoardSpace("Utilities", "Electric Company", "Misc.");
-    GameBoard[13] = new BoardSpace(140, "States Avenue", "Pink");
-    GameBoard[14] = new BoardSpace(160, "Virginia Avenue", "Pink");
-    GameBoard[15] = new BoardSpace("Railroad", "Pennsylvania Railroad", "Misc.");
-    GameBoard[16] = new BoardSpace(180, "St. James Place", "Orange");
-    GameBoard[17] = new BoardSpace("Bonus", "Community Chest", "Misc.");
-    GameBoard[18] = new BoardSpace(180, "Tennessee Avenue", "Orange");
-    GameBoard[19] = new BoardSpace(200, "New York Avenue", "Orange");
+    GameBoard[10] = new BoardSpace(140, "St. Charles Place", "Pink");
+    GameBoard[11] = new BoardSpace("Utilities", "Electric Company", "Misc.");
+    GameBoard[12] = new BoardSpace(140, "States Avenue", "Pink");
+    GameBoard[13] = new BoardSpace(160, "Virginia Avenue", "Pink");
+    GameBoard[14] = new BoardSpace("Railroad", "Pennsylvania Railroad", "Misc.");
+    GameBoard[15] = new BoardSpace(180, "St. James Place", "Orange");
+    GameBoard[16] = new BoardSpace("Bonus", "Community Chest", "Misc.");
+    GameBoard[17] = new BoardSpace(180, "Tennessee Avenue", "Orange");
+    GameBoard[18] = new BoardSpace(200, "New York Avenue", "Orange");
 
-    GameBoard[20] = new BoardSpace("Free Parking", "Free Parking", "Misc.");
+    GameBoard[19] = new BoardSpace("Free Parking", "Free Parking", "Misc.");
     
-    GameBoard[21] = new BoardSpace(220, "Kentucky Avenue", "Red");
-    GameBoard[22] = new BoardSpace("Bonus", "Chance", "Misc.");
-    GameBoard[23] = new BoardSpace(220, "Indiana Avenue","Red");
-    GameBoard[24] = new BoardSpace(240, "Illinois Avenue","Red");
-    GameBoard[25] = new BoardSpace("Railroad", "B&O Railroad", "Misc.");
-    GameBoard[26] = new BoardSpace(260, "Atlantic Avenue", "Yellow");
-    GameBoard[27] = new BoardSpace(260, "Ventnor Avenue", "Yellow");
-    GameBoard[28] = new BoardSpace("Utilities","Water Works", "Misc.");
-    GameBoard[29] = new BoardSpace(280, "Marvin Gardens", "Yellow");
+    GameBoard[20] = new BoardSpace(220, "Kentucky Avenue", "Red");
+    GameBoard[21] = new BoardSpace("Bonus", "Chance", "Misc.");
+    GameBoard[22] = new BoardSpace(220, "Indiana Avenue","Red");
+    GameBoard[23] = new BoardSpace(240, "Illinois Avenue","Red");
+    GameBoard[24] = new BoardSpace("Railroad", "B&O Railroad", "Misc.");
+    GameBoard[25] = new BoardSpace(260, "Atlantic Avenue", "Yellow");
+    GameBoard[26] = new BoardSpace(260, "Ventnor Avenue", "Yellow");
+    GameBoard[27] = new BoardSpace("Utilities","Water Works", "Misc.");
+    GameBoard[28] = new BoardSpace(280, "Marvin Gardens", "Yellow");
     
-    GameBoard[30] = new BoardSpace("Go To Jail", "Go To Jail", "Misc.");
+    GameBoard[29] = new BoardSpace("Go To Jail", "Go To Jail", "Misc.");
 
-    GameBoard[31] = new BoardSpace(300, "Pacific Avenue", "Green");
-    GameBoard[32] = new BoardSpace(300, "North Carolina Avenue", "Green");
-    GameBoard[33] = new BoardSpace("Bonus", "Community Chest", "Misc.");
-    GameBoard[34] = new BoardSpace(320, "Pennsylvania Avenue","Green");
-    GameBoard[35] = new BoardSpace("Railroad", "Short Line", "Misc.");
-    GameBoard[36] = new BoardSpace("Bonus", "Chance", "Misc");
-    GameBoard[37] = new BoardSpace(350, "Park Place", "Blue");
-    GameBoard[38] = new BoardSpace("Tax", "Luxury Tax", "Misc.");
-    GameBoard[39] = new BoardSpace(400, "Boardwalk", "Blue");
+    GameBoard[30] = new BoardSpace(300, "Pacific Avenue", "Green");
+    GameBoard[31] = new BoardSpace(300, "North Carolina Avenue", "Green");
+    GameBoard[32] = new BoardSpace("Bonus", "Community Chest", "Misc.");
+    GameBoard[33] = new BoardSpace(320, "Pennsylvania Avenue","Green");
+    GameBoard[34] = new BoardSpace("Railroad", "Short Line", "Misc.");
+    GameBoard[35] = new BoardSpace("Bonus", "Chance", "Misc");
+    GameBoard[36] = new BoardSpace(350, "Park Place", "Blue");
+    GameBoard[37] = new BoardSpace("Tax", "Luxury Tax", "Misc.");
+    GameBoard[38] = new BoardSpace(400, "Boardwalk", "Blue");
 
 
     // we want it to be.

@@ -98,18 +98,21 @@ public void DoAction(Player player)
             else if //Owner is not the player on the property
             {
             //Add FreeParking dollars to the player
-            FreeParking = 500;        //charge them whatever is worth
+            //FreeParking = 500;        //charge them whatever is worth
+            //?????
             }
         break;
 
         case "Tax": 
 
+            // charge opplayers depending on if they are on the 
+            //luxury or income square. 
         
         break;
 
         
        case "Free Parking":
-        
+         // Give the player all the cash and set the thingy to $500
 
         break;
 
@@ -133,18 +136,36 @@ public void DoAction(Player player)
         break;
 
         
-            case "Go To Jail":
-            //player.moveToJail();
+        case "Go To Jail":
+            player.moveToJail();
         break;
 
         
         case "Go":
-            //Give player 200$
+            //Also do nothing.
         break;
 
         
         case "Utilities":
-        
+            int cost = 0;
+            int multiplier = 0;
+
+            if(player.utilities_owned() == 0)
+            {
+                // Begin the buying thing;
+            }
+            else
+            {
+                if(player.utilities_owned() == 1)
+                    multiplier = 4;
+                else
+                    multiplier = 10;
+            
+                if (Board.initial_location > 11)
+                    cost = multiplier * (27 - Board.initial_location);
+                else
+                   cost = multiplier * (11 - Board.initial_location);
+            }
         break;
 
         
