@@ -1,5 +1,6 @@
 package com.lmhscodingclub.monopoly.boardlogic;
-class BoardSpace { //Maybe this should be abstract 
+public class BoardSpace 
+{ //Maybe this should be abstract 
 public static int FreeParking = 500;
 private String type;
 /*
@@ -31,8 +32,6 @@ Orange
 Misc. (Not for sale)
 */
 private Player owner;
-
-private int purchaseCost;
 private int rent;
 
 public BoardSpace()
@@ -49,12 +48,36 @@ public BoardSpace(String InputType, String InputName, String InputColor)
     color = InputColor;
 }
 
-public BoardSpace(int price, String InputName, String InputColor)
+public BoardSpace(int cost, String InputName, String InputColor)
 {
     type = "property";
     name = InputName;
     color = InputColor;
-    purchaseCost = price;    
+    price = cost;    
+}
+
+public String getName()
+{
+    return name;
+}
+
+public int getPrice() 
+{
+    return price;
+}
+
+public String type() 
+{
+    return type;
+}
+
+public String getColor(){
+    return color;
+}
+
+public int getRent() 
+{
+    return rent;
 }
 
 public void setRent(int set)
@@ -67,9 +90,9 @@ public void DoAction(Player player)
 {
     switch(type)
     {
-        b
+        
         case "Property":
-            if (owner == null && player.getBalance > cost) //getBalance may not be the final name
+            if (owner == null && player.getBalance > price) //getBalance may not be the final name
             {
                 //offer to buy
             }
@@ -77,7 +100,7 @@ public void DoAction(Player player)
             {
                 //do nothing
             }
-            else if //Owner is not the player on the property
+            else if (owner != player)
             {
                 //charge them whatever is worth
             }
@@ -85,28 +108,32 @@ public void DoAction(Player player)
 
 
         case "Railroad":
-            //charge the player
-            //move the player to the correct square    if (owner == null)
+            
+            if (owner == null)
             {
                 //offer to buy
             }
-            else if(owner == player)
-            //Charge the player the amount stated
-            //Add the amount charged to FreeParking    {
+            else if(owner == player) {
+            
                 //do nothing
             }
             else if //Owner is not the player on the property
             {
-            //Add FreeParking dollars to the player
-            //FreeParking = 500;        //charge them whatever is worth
-            //?????
+            //Charge the player the amount stated
+            //Add the amount charged to FreeParking    
             }
         break;
 
         case "Tax": 
 
-            // charge opplayers depending on if they are on the 
-            //luxury or income square. 
+            if(name == "Luxury Tax")
+            {
+                //charge the player $75
+            }
+            else // income tax
+            {
+                 //charge the player $200
+            }
         
         break;
 
@@ -118,7 +145,59 @@ public void DoAction(Player player)
 
         
         case "Bonus":
-        
+            int suprise = (int)(Math.random()*(5) + 0); // Random number from 0-4
+            if(name == "Chance")
+            {
+                switch(suprise)
+                {
+                    case 0:
+                        //send to random square. Suffer. 
+                    break;
+
+                    case 1:
+                        //send to jail (gulag)
+                    break;
+
+                    case 2:
+                        // swap places with another player (randomly)
+                    break;
+
+                    case 3:
+                        //swap money with another player (randomly)
+                    break;
+
+                    case 4:
+                        //You pay rent instead of revieving it next time 
+                    break;
+
+                }
+            }
+            else // name == Community Chest
+            {
+                switch(suprise)
+                {
+                    
+                    case 0:
+                        // Give $100
+                    break;
+
+                    case 1:
+                        // Make payer oay $50 to others
+                    break;
+
+                    case 2:
+                        //get out of jail FREE
+                    break;
+
+                    case 3:
+                        // Send to Go
+                    break;
+
+                    case 4:
+                        // Send to reading railroad 
+                    break;
+                }
+            }
 
         break;
 
@@ -142,7 +221,7 @@ public void DoAction(Player player)
 
         
         case "Go":
-            //Also do nothing.
+            //+200 dollars.
         break;
 
         
