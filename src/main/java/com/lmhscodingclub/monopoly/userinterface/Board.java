@@ -43,6 +43,7 @@ public class Board extends JPanel {
             drawInnerRectangles(g2);
             drawProperties(g2);
             drawMonopolyLogo(g2);
+            new ActionMenu();
         } catch (IOException e) {
             // TODO Auto-generated catch block
             e.printStackTrace();
@@ -117,6 +118,11 @@ public class Board extends JPanel {
         g2.setPaint(boardColor);
         g2.fill(new Rectangle2D.Double(x, y, w, h));
         g2.setPaint(Color.BLACK);
-        g2.draw(new Rectangle2D.Double(x, y, w, h));
+        
+        Rectangle2D.Double propertyTile = new Rectangle2D.Double(x, y, w, h);
+        g2.draw(propertyTile);
+
+        boolean isSelected = propertyTile.isSelected();
     }
+    
 }
