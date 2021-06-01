@@ -8,10 +8,10 @@ public class PropertyTrade implements ITradeItem {
     }
 
     public void removeFromOwnership(Ownership o) {
-        o.getProperties().remove(property);
+        o.removeBoardSpace(property.getBoardSpace());
     }
 
     public void addToOwnership(Ownership o) {
-        o.getProperties().add(property);
+        o.addProperty(property);
     }
 }

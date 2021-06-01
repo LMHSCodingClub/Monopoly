@@ -1,5 +1,7 @@
 package com.lmhscodingclub.monopoly.playerdata;
 
+import com.lmhscodingclub.monopoly.boardlogic.BoardSpace;
+
 public class Property {
     BoardSpace space;
     int houseCount;
